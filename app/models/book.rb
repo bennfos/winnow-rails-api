@@ -1,7 +1,7 @@
 class Book < ApplicationRecord
   has_many :pages
 
-  before_save :downcase_name
+  before_save :downcase_title
 
   validates :title, presence: true
 
@@ -9,8 +9,7 @@ class Book < ApplicationRecord
     title
   end
 
-  def downcase_name
-    self.name.downcase!
+  def downcase_title
+    self.title.downcase!
   end
-
 end
