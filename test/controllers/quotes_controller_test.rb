@@ -12,7 +12,7 @@ class QuotesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create quote" do
     assert_difference('Quote.count') do
-      post quotes_url, params: { quote: {  } }, as: :json
+      post quotes_url, params: { quote: { page_id: @quote.page_id, quote_author: @quote.quote_author, quote_text: @quote.quote_text } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class QuotesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update quote" do
-    patch quote_url(@quote), params: { quote: {  } }, as: :json
+    patch quote_url(@quote), params: { quote: { page_id: @quote.page_id, quote_author: @quote.quote_author, quote_text: @quote.quote_text } }, as: :json
     assert_response 200
   end
 

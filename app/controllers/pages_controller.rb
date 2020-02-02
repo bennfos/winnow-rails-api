@@ -46,6 +46,6 @@ class PagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def page_params
-      params.fetch(:page, {})
+      params.require(:page).permit(:month, :day, :thought, :book_id)
     end
 end

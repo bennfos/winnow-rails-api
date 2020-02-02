@@ -12,7 +12,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create page" do
     assert_difference('Page.count') do
-      post pages_url, params: { page: {  } }, as: :json
+      post pages_url, params: { page: { book_id: @page.book_id, day: @page.day, month: @page.month, thought: @page.thought } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update page" do
-    patch page_url(@page), params: { page: {  } }, as: :json
+    patch page_url(@page), params: { page: { book_id: @page.book_id, day: @page.day, month: @page.month, thought: @page.thought } }, as: :json
     assert_response 200
   end
 
