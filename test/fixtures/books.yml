@@ -4,10 +4,10 @@ one:
   title: MyString
   description: MyText
   starts_blank: false
-  user_id: 
+  user_id: 1
 
 two:
   title: MyString
   description: MyText
   starts_blank: false
-  user_id: 
+  user_id: 1
