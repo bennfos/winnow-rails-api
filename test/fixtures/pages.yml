@@ -4,10 +4,10 @@ one:
   month: MyString
   day: MyString
   thought: MyText
-  book_id: 
+  book_id: 1
 
 two:
   month: MyString
   day: MyString
   thought: MyText
-  book_id: 
+  book_id: 1
