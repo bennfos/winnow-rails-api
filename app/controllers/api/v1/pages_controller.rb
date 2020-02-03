@@ -1,4 +1,4 @@
-module api::v1
+module Api::V1
   class PagesController < ApplicationController
     before_action :set_page, only: [:show, :update, :destroy]
 

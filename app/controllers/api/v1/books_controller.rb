@@ -1,4 +1,4 @@
-module api::v1
+module Api::V1
   class BooksController < ApplicationController
     before_action :set_book, only: [:show, :update, :destroy]
 
