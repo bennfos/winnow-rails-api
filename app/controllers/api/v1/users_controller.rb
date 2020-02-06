@@ -1,6 +1,6 @@
 module Api::V1
   class UsersController < ApplicationController
-    # has_secure_password
+    has_secure_password
     before_action :set_user, only: [:show, :update, :destroy]
 
     # GET /users
@@ -12,18 +12,18 @@ module Api::V1
 
 
 
-    # # POST /users
-    # def create
-    #   user = User.create(user_params)
+    # POST /users
+    def create
+      user = User.create(user_params)
 
-    #   if user.valid?
-    #     payload = {user_id: user.id}
-    #     token = encode_token(payload)
-    #     render json: {user: user, jwt: token}
-    #   else
-    #     render json: {errors: user.errors.full_messages}, status: :not_acceptable
-    #   end
-    # end
+      if user.valid?
+        payload = {user_id: user.id}
+        token = encode_token(payload)
+        render json: {user: user, jwt: token}
+      else
+        render json: {errors: user.errors.full_messages}, status: :not_acceptable
+      end
+    end
 
 
 
