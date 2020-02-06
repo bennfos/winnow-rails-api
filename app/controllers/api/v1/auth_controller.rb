@@ -8,9 +8,19 @@ module Api::V1
         token = encode_token(payload)
         render json: {user: user, jwt: token}
       else
-        render json: {failure: "Invalid username or password"}
+        render json: {failure: "invalid username or password"}
       end
     end
+
+    def auto_login
+      if session_user
+        render json: session_user
+      else
+        render json: {errors: "no user logged in"}
+      end
+    end
+
+
 
   end
 end
