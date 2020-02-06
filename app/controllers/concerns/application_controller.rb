@@ -27,6 +27,7 @@ def decoded_token
       []
     end
   end
+end
 
   before_action :require_login
 
