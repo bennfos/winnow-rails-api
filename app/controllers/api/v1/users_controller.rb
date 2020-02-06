@@ -1,6 +1,6 @@
 module Api::V1
   class UsersController < ApplicationController
-    has_secure_password
+    # has_secure_password
     before_action :set_user, only: [:show, :update, :destroy]
 
     # GET /users
