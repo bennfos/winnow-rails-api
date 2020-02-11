@@ -3,11 +3,12 @@ module Api::V1
     before_action :set_page, only: [:show, :update, :destroy]
 
     # GET /pages
-    def index
-      @pages = Page.all
-
-      render json: @pages
+    def check
+      @page = Page.find(params[:month, :day])
+      render json: @page
     end
+
+
 
     # GET /pages/1
     def show

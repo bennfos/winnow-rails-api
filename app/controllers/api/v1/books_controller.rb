@@ -19,7 +19,7 @@ module Api::V1
       @book = Book.new(book_params)
 
       if @book.save
-        render json: @book, status: :created, location: @book
+        redirect_to action: "index"
       else
         render json: @book.errors, status: :unprocessable_entity
       end
