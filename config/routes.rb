@@ -4,9 +4,9 @@ Rails.application.routes.draw do
       resources :quotes
       resources :books
       resources :pages
-      get "/:month/:day", to: "pages#check"
+      get "pages/:book_id/:month/:day", to: "pages#check"
       resources :users, only: [:create]
-      get "/pages", to: "pages#check"
+
       # post "/login", to: "auth#login"
       # get "/auto_login", to: "auth#auto_login"
       # get "/user_is_authed", to: "auth#user_is_authed"

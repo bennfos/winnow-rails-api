@@ -2,10 +2,15 @@ module Api::V1
   class PagesController < ApplicationController
     before_action :set_page, only: [:show, :update, :destroy]
 
-    # GET /pages
+    # GET /pages/book_id/month/day
     def check
-      @page = Page.find(params[:month, :day])
-      render json: @page
+      @page = Page.find_by(book_id: params[:book_id], month: params[:month], day: params[:day])
+      if @page
+        render json: @page
+      else
+        @page = {id: 0, book_id: 0, month: "", day: ""}
+        render json: @page
+      end
     end
 
 
