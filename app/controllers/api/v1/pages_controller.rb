@@ -20,14 +20,7 @@ module Api::V1
 
     # POST /pages
     def create
-      @page = Page.new(page_params)
-
-      if @page.save
-        render json: @page, status: :created, location: @page
-        return @page
-      else
-        render json: @page.errors, status: :unprocessable_entity
-      end
+      @page = Page.create(page_params)
     end
 
     # PATCH/PUT /pages/1
