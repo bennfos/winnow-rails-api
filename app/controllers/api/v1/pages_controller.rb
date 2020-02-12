@@ -24,6 +24,7 @@ module Api::V1
 
       if @page.save
         render json: @page, status: :created, location: @page
+        return @page
       else
         render json: @page.errors, status: :unprocessable_entity
       end
