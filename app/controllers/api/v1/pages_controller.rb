@@ -20,7 +20,8 @@ module Api::V1
 
     # POST /pages
     def create
-      Page.create(page_params)
+      @page = Page.create(page_params)
+      render json: @page
     end
 
     # PATCH/PUT /pages/1
