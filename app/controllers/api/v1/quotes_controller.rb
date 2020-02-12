@@ -16,13 +16,8 @@ module Api::V1
 
     # POST /quotes
     def create
-      @quote = Quote.new(quote_params)
-
-      if @quote.save
-        render json: @quote, status: :created, location: @quote
-      else
-        render json: @quote.errors, status: :unprocessable_entity
-      end
+      @quote = Quote.create(quote_params)
+        render json: @quote
     end
 
     # PATCH/PUT /quotes/1
