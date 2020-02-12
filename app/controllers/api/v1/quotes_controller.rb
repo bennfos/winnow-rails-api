@@ -5,7 +5,11 @@ module Api::V1
     # GET /quotes
     def index
       @quotes = Quote.all
+      render json: @quotes
+    end
 
+    def page_quotes
+      @quotes = Quote.where(page_id: params[:page_id])
       render json: @quotes
     end
 
@@ -17,7 +21,7 @@ module Api::V1
     # POST /quotes
     def create
       @quote = Quote.create(quote_params)
-        render json: @quote
+      render json: @quote
     end
 
     # PATCH/PUT /quotes/1
