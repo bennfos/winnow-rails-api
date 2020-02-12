@@ -13,8 +13,6 @@ module Api::V1
       end
     end
 
-
-
     # GET /pages/1
     def show
       render json: @page
