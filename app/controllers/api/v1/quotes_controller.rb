@@ -4,13 +4,13 @@ module Api::V1
 
     # GET /quotes
     def index
-      @quotes = Quote.all
-      render json: @quotes
-    end
-
-    def page_quotes
-      @quotes = Quote.where(page_id: params[:page_id])
-      render json: @quotes
+      if params[:page_id]
+        @quotes = Quote.where(page_id: params[:page_id])
+        render json: @quotes
+      else
+        @quotes = Quote.all()
+        render json: @quotes
+      end
     end
 
     # GET /quotes/1
