@@ -5,10 +5,11 @@ module Api::V1
     # GET /quotes
     def index
       if params[:search]
-        @quotes = Quote.includes(:page).where("page.month LIKE ?", "%#{params[:search]}%")
-          .or(Quote.includes(:page).where("page.thought LIKE ?", "%#{params[:search]}%"))
-          .or(Quote.includes(:page).where("quote_text LIKE ?", "%#{params[:search]}%"))
-          .or(Quote.includes(:page).where("quote_author LIKE ?", "%#{params[:search]}%"))
+        @quotes =
+        Quote.includes(:page).where("page.month LIKE ?", params[:search])
+          .or(Quote.includes(:page).where("page.thought LIKE ?", params[:search])
+          .or(Quote.includes(:page).where("quote_text LIKE ?", params[:search])
+          .or(Quote.includes(:page).where("quote_author LIKE ?", params[:search]))
         render json: @quotes
       elsif params[:page_id]
         @quotes = Quote.where(page_id: params[:page_id])
