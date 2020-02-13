@@ -7,6 +7,11 @@ module Api::V1
       if params[:page_id]
         @quotes = Quote.where(page_id: params[:page_id])
         render json: @quotes
+      elsif params[:search]
+        @quotes = Quote.includes(:page).where('page.month' = params[:search]
+          .or(Quote.includes(:page).where('page.thought' = params[:search])
+          .or(Quote.where(quote_text: params[:search]))
+          .or(Quote.where(quote_author: params[:search]))
       else
         @quotes = Quote.all()
         render json: @quotes
@@ -46,7 +51,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def quote_params
-        params.require(:quote).permit(:quote_author, :quote_text, :page_id)
+        params.require(:quote).permit(:quote_author, :quote_text, :page_id, :search)
       end
   end
 end
