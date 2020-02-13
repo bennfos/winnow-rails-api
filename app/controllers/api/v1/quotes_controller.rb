@@ -7,8 +7,8 @@ module Api::V1
       if params[:search]
         @quotes =
         Quote.includes(:page).where("page.month LIKE ?", params[:search])
-          .or(Quote.includes(:page).where("page.thought LIKE ?", params[:search])
-          .or(Quote.includes(:page).where("quote_text LIKE ?", params[:search])
+          .or(Quote.includes(:page).where("page.thought LIKE ?", params[:search]))
+          .or(Quote.includes(:page).where("quote_text LIKE ?", params[:search]))
           .or(Quote.includes(:page).where("quote_author LIKE ?", params[:search]))
         render json: @quotes
       elsif params[:page_id]
