@@ -7,10 +7,10 @@ module Api::V1
       if params[:search].present?
         search_param = params[:search].downcase
         @quotes =
-        Quote.where("page.month LIKE ?", "%#{search_param}%")
-          .or(Quote.where("page.thought LIKE ?", "%#{search_param}%"))
-          .or(Quote.where("quote_text LIKE ?", "%#{search_param}%"))
-          .or(Quote.where("quote_author LIKE ?", "%#{search_param}%"))
+        Quote.joins(:page).where("pages.month LIKE ?", "%#{search_param}%")
+          .or(Quote.joins(:page).where("pages.thought LIKE ?", "%#{search_param}%"))
+          .or(Quote.joins(:page).where("quote_text LIKE ?", "%#{search_param}%"))
+          .or(Quote.joins(:page).where("quote_author LIKE ?", "%#{search_param}%"))
 
         render :json => @quotes, :include => :page
 
