@@ -5,7 +5,7 @@ module Api::V1
     # GET /quotes
     def index
       if params[:search].present?
-        @quotes = Quote.includes(:page).where("quote_text LIKE ?", "%#{params[:search]}%")
+        @quotes = Quote.joins(:page).where("quote_text LIKE ?", "%#{params[:search]}%")
         # Quote.includes(:page).where("page.month LIKE ?", "%#{params[:search]}%")
           # .or(Quote.includes(:page).where("page.thought LIKE ?", "%#{params[:search]}%"))
 
