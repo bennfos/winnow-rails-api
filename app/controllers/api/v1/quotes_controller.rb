@@ -12,6 +12,7 @@ module Api::V1
           .or(Quote.includes(:page).where("page.thought LIKE ?", "%#{params[:search]}%"))
           .or(Quote.includes(:page).where("quote_text LIKE ?", "%#{params[:search]}%"))
           .or(Quote.includes(:page).where("quote_author LIKE ?", "%#{params[:search]}%"))
+        render json: @quotes
       else
         @quotes = Quote.all()
         render json: @quotes
