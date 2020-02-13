@@ -8,7 +8,7 @@ module Api::V1
         @quotes = Quote.where(page_id: params[:page_id])
         render json: @quotes
       elsif params[:search]
-        @quotes = Quote.includes(:page).where("page.month" => params[:search]
+        @quotes = Quote.includes(:page).where("page.month" => params[:search])
           .or(Quote.includes(:page).where("page.thought" => params[:search])
           .or(Quote.includes(:page).where(quote_text: params[:search]))
           .or(Quote.includes(:page).where(quote_author: params[:search]))
