@@ -15,9 +15,6 @@ module Api::V1
         render json: {
           status: 401
         }
-      ensure
-
-      end
       end
     end
   end
