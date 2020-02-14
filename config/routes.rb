@@ -5,7 +5,8 @@ Rails.application.routes.draw do
       resources :books
       resources :pages
       resources :quotes
-      get "pages/:book_id/:month/:day", to: "pages#check"
+      post 'users' => 'users#create'
+      get 'pages/:book_id/:month/:day', to: 'pages#check'
       post 'user_token' => 'user_token#create'
 
       # post "/login", to: "auth#login"
