@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :quotes
+      resources :users
       resources :books
       resources :pages
+      resources :quotes
       get "pages/:book_id/:month/:day", to: "pages#check"
-      resources :users, only: [:create]
       post 'user_token' => 'user_token#create'
 
       # post "/login", to: "auth#login"
