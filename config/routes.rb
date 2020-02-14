@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :pages
       get "pages/:book_id/:month/:day", to: "pages#check"
       resources :users, only: [:create]
+      post 'user_token' => 'user_token#create'
 
       # post "/login", to: "auth#login"
       # get "/auto_login", to: "auth#auto_login"
