@@ -9,7 +9,6 @@ module Api::V1
         password: params['password'],
         password_confirmation: params['password_confirmation']
       )
-
       if user
         session[:user_id] = user.id
         render json: {
@@ -21,7 +20,7 @@ module Api::V1
           status: 500
         }
       end
-
     end
+
   end
 end
