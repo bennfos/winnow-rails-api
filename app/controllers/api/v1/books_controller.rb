@@ -4,6 +4,7 @@ module Api::V1
 
     # GET /books
     def index
+
       @books = Book.where(user_id: session[:user_id])
       render json: @books
     end
