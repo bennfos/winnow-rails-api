@@ -10,13 +10,13 @@ module Api::V1
         user = @current_user
         @quotes =
         Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-          .where("quote_text LIKE ? AND books.user_id = ?", "%#{search_param}%", user.id)
+          .where("quote_text LIKE ? AND books.user_id = ?", "%#{search_param}%", "user.id")
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-            .where("pages.thought LIKE ? AND books.user_id = ?", "%#{search_param}%", user.id))
+            .where("pages.thought LIKE ? AND books.user_id = ?", "%#{search_param}%", "#{user.id}"))
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-            .where("quote_text LIKE ? AND books.user_id = ?", "%#{search_param}%", user.id))
+            .where("quote_text LIKE ? AND books.user_id = ?", "%#{search_param}%", "#{user.id}"))
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-            .where("quote_author LIKE ? AND books.user_id = ?", "%#{search_param}%", user.id))
+            .where("quote_author LIKE ? AND books.user_id = ?", "%#{search_param}%", "#{user.id}"))
 
         render :json => @quotes, :include => :page
 
