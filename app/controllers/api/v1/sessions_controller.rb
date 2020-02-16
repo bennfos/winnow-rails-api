@@ -9,7 +9,7 @@ module Api::V1
       if user
         session[:user_id] = user.id
         render json: {
-          session_id: session[:user_id]
+          session_id: session[:user_id],
           status: :created,
           logged_in: true,
           user: user
