@@ -1,16 +1,22 @@
 module Api::V1
   class QuotesController < ApplicationController
+    include CurrentUserConcern
     before_action :set_quote, only: [:show, :update, :destroy]
 
     # GET /quotes
     def index
       if params[:search].present?
         search_param = params[:search].downcase
+        user = @current_user
         @quotes =
-        Quote.joins(:page).where("pages.month LIKE ?", "%#{search_param}%")
-          .or(Quote.joins(:page).where("pages.thought LIKE ?", "%#{search_param}%"))
-          .or(Quote.joins(:page).where("quote_text LIKE ?", "%#{search_param}%"))
-          .or(Quote.joins(:page).where("quote_author LIKE ?", "%#{search_param}%"))
+        Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
+          .where("quote_text LIKE ? AND books.user_id = ?", "%#{search_param}%", user.id)
+          .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
+            .where("pages.thought LIKE ? AND books.user_id = ?", "%#{search_param}%", user.id))
+          .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
+            .where("quote_text LIKE ? AND books.user_id = ?", "%#{search_param}%", user.id))
+          .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
+            .where("quote_author LIKE ? AND books.user_id = ?", "%#{search_param}%", user.id))
 
         render :json => @quotes, :include => :page
 
