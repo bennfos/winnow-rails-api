@@ -18,7 +18,7 @@ module Api::V1
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
             .where("LOWER(quote_author) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
         if @quotes.empty?
-          render :json { status: 200 }
+          render json: { status: 200 }
         else
         render :json => @quotes, :include => :page
         end
