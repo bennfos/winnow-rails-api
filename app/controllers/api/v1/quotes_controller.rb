@@ -10,16 +10,18 @@ module Api::V1
         @current_user = current_user
         @quotes =
         Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-          .where("LOWER(quote_text) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id)
+          .where("LOWER(pages.month) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id)
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
             .where("LOWER(pages.thought) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
             .where("LOWER(quote_text) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
             .where("LOWER(quote_author) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
-
+        if @quotes.empty?
+          render :json { status: 200 }
+        else
         render :json => @quotes, :include => :page
-
+        end
       elsif params[:page_id].present?
         @quotes = Quote.where(page_id: params[:page_id])
         render json: @quotes
