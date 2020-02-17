@@ -7,15 +7,16 @@ module Api::V1
     def index
       if params[:search].present?
         search_param = params[:search].downcase
+        @current_user = current_user
         @quotes =
         Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-          .where("quote_text LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id)
+          .where("LOWER(quote_text) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id)
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-            .where("pages.thought LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
+            .where("LOWER(pages.thought) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-            .where("quote_text LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
+            .where("LOWER(quote_text) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-            .where("quote_author LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
+            .where("LOWER(quote_author) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
 
         render :json => @quotes, :include => :page
 
