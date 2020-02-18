@@ -18,7 +18,6 @@ module Api::V1
           .or(Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
             .where("LOWER(quote_author) LIKE ? AND books.user_id = ?", "%#{search_param}%", current_user.id))
         render :json => @quotes, :include => :page
-        end
       elsif params[:page_id].present?
         @quotes = Quote.where(page_id: params[:page_id])
         render json: @quotes
