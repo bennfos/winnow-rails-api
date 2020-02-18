@@ -5,9 +5,14 @@ module Api::V1
 
     # GET /quotes
     def index
+      if params[:page_id].present?
+        @quotes = Quote.where(page_id: params[:page_id])
+        render json: @quotes
+      else
       @quotes = Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
           .where("books.user_id = ?", params[:user_id])
       render json: @quotes, :include => :page
+      end
     end
 
     # GET /quotes/1
