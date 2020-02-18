@@ -5,9 +5,8 @@ module Api::V1
 
     # GET /quotes
     def index
-      @current_user = current_user
       @quotes = Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
-          .where("books.user_id = ?", @current_user.id)
+          .where("books.user_id = ?", params[:user_id])
       render json: @quotes, :include => :page
     end
 
@@ -44,7 +43,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def quote_params
-        params.require(:quote).permit(:quote_author, :quote_text, :page_id, :search)
+        params.require(:quote).permit(:quote_author, :quote_text, :page_id, :search, :user_id)
       end
   end
 end
