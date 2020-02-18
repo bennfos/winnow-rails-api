@@ -6,7 +6,7 @@ module Api::V1
     # GET /quotes
     def index
       @current_user = current_user
-        Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
+      @quotes = Quote.joins(:page, 'LEFT JOIN books ON books.id = pages.book_id')
           .where("books.user_id = ?", @current_user.id)
       render json: @quotes, :include => :page
     end
