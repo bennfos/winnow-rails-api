@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   include ::ActionController::Cookies
 
-  after_filter :short_session
+  after_action :short_session
 
   def short_session
     request.session_options = request.session_options.dup
