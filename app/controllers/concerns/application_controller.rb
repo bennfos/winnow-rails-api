@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   include ::ActionController::Cookies
 
-  after_filter :short_session
+  after_action :short_session
 
   Rails.application.config.action_controller.forgery_protection_origin_check = false
 
