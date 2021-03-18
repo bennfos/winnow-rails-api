@@ -10,9 +10,8 @@ Rails.application.routes.draw do
       resources :pages
       resources :quotes
       get 'pages/:book_id/:month/:day', to: 'pages#check'
-      match '*path', :controller => 'application', :action => 'empty', :constraints => {:method => "OPTIONS"}
+
     end
   end
-
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

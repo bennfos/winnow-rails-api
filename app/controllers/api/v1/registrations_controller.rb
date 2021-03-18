@@ -1,9 +1,5 @@
 module Api::V1
   class RegistrationsController < ApplicationController
-    skip_before_action :verify_authenticity_token
-    before_filter :add_cors_headers
-
-
     def create
       user = User.create!(
         first_name: params['first_name'],
