@@ -1,5 +1,6 @@
 module Api::V1
   class RegistrationsController < ApplicationController
+    skip_before_action :verify_authenticity_token
     def create
       user = User.create!(
         first_name: params['first_name'],
