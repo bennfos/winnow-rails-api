@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   after_action :short_session
 
+  Rails.application.config.action_controller.forgery_protection_origin_check = false
+
   def short_session
     request.session_options = request.session_options.dup
     request.session_options[:expire_after] = 14.days
